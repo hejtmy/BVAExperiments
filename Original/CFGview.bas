@@ -20,5 +20,3 @@ phases(p).sectors(s).kopiedo = ""
 phases(p).sectors(s).beepcount = 1 '1x pipne'
 phases(p).sectors(s).keytonext = "g" 'G pro dalsi fazi - neprejde automaticky'
 phases(p).sectors(s).keyfound = "" 'F pro oznaceni udane pozice cile'
-
-

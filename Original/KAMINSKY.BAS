@@ -1,4 +1,4 @@
-DECLARE SUB eegwrite ()
+DECLARE SUB eegwrite (zapni%)
 DECLARE SUB debugopen ()
 DECLARE SUB debugcues ()
 DECLARE SUB debugclose ()
@@ -41,7 +41,7 @@ DECLARE SUB cuesupdate (cuesnew() AS ANY)
 ' microsofti typy na assembler - kvuli mysi
 ' $INCLUDE: 'qbx.bi'
 
-CONST USETRACK% = 1
+CONST USETRACK% = 0
 CONST USECUES% = 1
 CONST ROTATEARENA% = 0
 CONST USESOUND% = 1
@@ -247,16 +247,6 @@ SUB cueswrite (position%, symbol%, start%)
 	END IF
 END SUB
 
-SUB eegwrite (on%)   '14.4.2015 synchronizace s iEEG'
-    IF on% == 1
-        OUT &H378, 255
-        OUT &H37A, 1 'strobe on'
-    ELSE
-        OUT &H378, 4
-        OUT &H37A, 0 'strobe on'
-    END IF
-END SUB
-
 SUB debugclose
 	IF DEBUG = 1 THEN
 		CLOSE #4
@@ -283,6 +273,16 @@ SUB debugsetcue (cc AS cue)
 		PRINT #4, DATE$, TIME$, "drf2func: debugsetcue; laser,segments, startpoint"
 	PRINT #4, cc.laser, cc.segments, cc.startPoint
   END IF
+END SUB
+
+SUB eegwrite (zapni%)     '14.4.2015 synchronizace s iEEG'
+    IF zapni% = 1 THEN
+	OUT &H378, 255
+	OUT &H37A, 1 'strobe on'
+    ELSE
+	OUT &H378, 4
+	OUT &H37A, 0 'strobe on'
+    END IF
 END SUB
 
 'private'

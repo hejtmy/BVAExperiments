@@ -74,7 +74,7 @@ DECLARE FUNCTION sectorbeepcount (s AS ANY)
 DECLARE FUNCTION getlevel ()
 DECLARE SUB prevcenter (p AS ANY)
 DECLARE SUB resetcounts (curf!, pp() AS ANY)
-DECLARE SUB eegwrite ()
+DECLARE SUB eegwrite (zapni%)
 
 ' typy zavisle na projektu'
 ' $INCLUDE: 'TYPEDEF.BAS'
@@ -172,7 +172,7 @@ DO
 	IF klavesa$ = "w" THEN CALL rewritecues 'prepise cues, kdyz se objevi nejake chybne'
 	IF klavesa$ = "-" THEN CALL levelforcompare(getlevel - 1)
 	IF klavesa$ = "+" THEN CALL levelforcompare(getlevel + 1)
-	if klavesa$ = "b" then CALL beepbvastart(10, 1)
+	IF klavesa$ = "b" THEN CALL beepbvastart(10, 1)
 	IF klavesa$ = "p" THEN ' vraceni pokusu zpet'
 	   WHILE currentphase > 0
 		 currentphase = currentphase - 1
@@ -202,12 +202,12 @@ DO
 	rfy = y
 	' POZOR, POKUD PRIDAM ARENA FRAME, vynecha se kazdy druhy frame asi!'
 	IF phases(currentphase).noarenaframe = 0 THEN 'pokus existuje arena frame'
-   	CALL arenapos(angle, nic)    ' zjistim soucasne otoceni areny
-   	'PRINT angle
-   	CALL PProtate(x, y, angle)   ' orotuji pozici cloveka
-	else 
+	CALL arenapos(angle, nic)    ' zjistim soucasne otoceni areny
+	'PRINT angle
+	CALL PProtate(x, y, angle)   ' orotuji pozici cloveka
+	ELSE
       angle = 0' arena se neotaci
-   end if
+   END IF
 	afx = x 'arena frame'
 	afy = y
 	CALL savepos(currentpos, rfx, rfy, afx, afy) 'ulozim pozici do currentpos
@@ -231,9 +231,9 @@ DO
 	FOR s = 0 TO phases(currentphase).sectorsno - 1 'pro vsechny sektory v tehle fazi potrebuju zjistit jestli do nich clovek vstoupil
 		DIM ss AS sector
 		IF phases(currentphase).sectors(s).mode = -1 THEN
-         faze = phases(currentphase).sectors(s).kopiez ' nektere faze maji takhle sektory zkopirovane odjinud'
+	 faze = phases(currentphase).sectors(s).kopiez ' nektere faze maji takhle sektory zkopirovane odjinud'
        ELSE
-         faze = currentphase
+	 faze = currentphase
        END IF
        ss = phases(faze).sectors(s)
 		IF ss.mode = 0 THEN 'RF'
@@ -283,8 +283,8 @@ DO
 		  avoidbeep = 1 'vstoupil jsem do avoidance sektoru'
 		END IF
 		' KLAVESA G DALSI FAZE'
-    IF NOT empty(ss.keytonext) AND klavesa$ = LCASE$(ss.keytonext) AND (empty(phases(faze).keytocues) OR phases(faze).keytocuespressed = 1) AND (empty(ss.keyfound) OR ss.keyfoundbeepstop =1 or ss.keyfoundpressed > 0) AND (empty(phases(faze).keytostart) OR phases(faze). _
-keytostartpressed) THEN
+    IF NOT empty(ss.keytonext) AND klavesa$ = LCASE$(ss.keytonext) AND (empty(phases(faze).keytocues) OR phases(faze).keytocuespressed = 1) AND (empty(ss.keyfound) OR ss.keyfoundbeepstop = 1 OR ss.keyfoundpressed > 0) AND (empty(phases(faze). _
+keytostart) OR phases(faze).keytostartpressed) THEN
 	    tonextphase = 1
 	    phases(faze).sectors(s).lastA = 0 ' pred prepnutim do jine aktivni faze jeste zrusim tohle, ono mi to jinak pretrvava po celou dobu
 		  phases(faze).sectors(s).frame0 = 0 ' zase kvuli checklatency
@@ -292,7 +292,7 @@ keytostartpressed) THEN
 		  IF ss.keyfoundpressed = 0 THEN 'pokud nebyla v teto fazi stlacena klavesa o nalezeni sektoru, tak nastavim ze jako zmacknuta'
 		    klavesa2$ = ss.keyfound
 		  END IF
-		  IF phases(faze).virtual = 1 THEN 
+		  IF phases(faze).virtual = 1 THEN
 				phases(faze).goalvisible = 0 'na zacatku virtualni faze se vzdy zmici cil'
 				CALL nakresliareny(screenarenas, prr, phases(), phasesno, currentphase) ' kamil 21.4.2010 - POKUS prekreslim areny aby zmizela posledni pozice mysi'
 			END IF
@@ -304,19 +304,19 @@ keytostartpressed) THEN
 		' KLAVESA F GOAL FOUND
 		IF klavesa2$ = ss.keyfound OR (NOT empty(ss.keyfound) AND klavesa$ = LCASE$(ss.keyfound) AND (empty(phases(faze).keytocues) OR phases(faze).keytocuespressed = 1)) THEN
 		  IF empty(ss.keyfound) AND ss.avoidstate = 1 THEN ' pokud neni F definovane a presto je to tady - cili se to sem dostalo pres stlaceni G'
-		    ' 8.1.2010 - sem se to myslim nikdy nemuze dostat - protoze cely blok je platny jen pokud je klavesa keyfound 
+		    ' 8.1.2010 - sem se to myslim nikdy nemuze dostat - protoze cely blok je platny jen pokud je klavesa keyfound
 		    'piskat to ma, jen pokud se nemacka f pri nalezeni cile'
 		    ' a jen pokud jsem opravdu v tom sektoru a ne nekde mimo
 		    'sem se to muze dostat i bez stlaceni F pri stlaceni G - to to ma piskat
 		    'beepcount = sectorbeepcount(ss) 'a mam pipnout tolikrat kolik je v konfiguraci '
 		  END IF
-		  if ss.keyfoundpressed = 0 then
+		  IF ss.keyfoundpressed = 0 THEN
 		     phases(faze).sectors(s).avoidstate = 1
 		     ss.avoidstate = 1
-		  end if
+		  END IF
 		  phases(faze).sectors(s).keyfoundpressed = ss.keyfoundpressed + 1
 		  phases(faze).sectors(s).keyfoundpressedframe = frame
-		ELSEIF NOT empty(ss.keyfound) AND (ss.keyfoundbeepstop = 0 or (ss.keyfoundbeepstop = 2 AND ss.keyfoundpressed <> 1)) THEN 'zablokuju ulozeni soku, pokud neni stlacena klavesa f' 
+		ELSEIF NOT empty(ss.keyfound) AND (ss.keyfoundbeepstop = 0 OR (ss.keyfoundbeepstop = 2 AND ss.keyfoundpressed <> 1)) THEN 'zablokuju ulozeni soku, pokud neni stlacena klavesa f'
 		  ' pokud je keyfoundbeepstop=2, tak pred stlacenim klavesy f cil nepipa, po prvnim stlaceni pipa, a po druhem stlaceni zase nepipa - oprava 8.1.2010
 		  ' piska to pri definovane klavese f a vstupu do oblasti pokud je keyfoundbeepstop = 1 nebo kfbs= 2 a zmacknuto 1x
 			' takze nepiska to pokud je kfbs 0 nebo (2 a zmacknuto <>1 )
@@ -386,9 +386,9 @@ keytostartpressed) THEN
     CALL PPset(afx, afy, screenarenas.afx, screenarenas.afy, avoidstate) 'nakresli bod v AF'
   END IF
   IF klavesa$ = "e" THEN 'singal na paralelni port kvuli EEG - 15.4.2015'
-	 CALL eegwrite (1)
-	 CALL cekat(1000)
-   CALL eegwrite (0) 
+	 CALL eegwrite(1)
+	 CALL cekat(10000)
+   CALL eegwrite(0)
 	END IF
 	CALL savetrack(frame, rfx, rfy, afx, afy, angle, currentphase, phasesno, phases(), pauseframe, klavesa$)' tisk tracku
 	CALL nahledcx(rfx, rfy, prr, angle, avoidstate, currentphase, phases())
@@ -416,7 +416,7 @@ keytostartpressed) THEN
 	END IF
 	anglelast = angle
 		
-	IF avoidstate = 1 or beepcount > 0 THEN 'pokud jsem ve framu a ... muzu beepat jen pokud neni pauza'
+	IF avoidstate = 1 OR beepcount > 0 THEN 'pokud jsem ve framu a ... muzu beepat jen pokud neni pauza'
 		IF beepcount > 0 THEN ' je to preference sector'
 		  CALL beepbvastart(beepcount, 0)
 		ELSEIF avoidbeep = 1 THEN ' avoidance sector'

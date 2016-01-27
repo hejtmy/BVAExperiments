@@ -1,18 +1,12 @@
-experimentu! = 5 ' !TODO! 
+experimentu! = 2 ' !TODO! 
 prekreslinastartu! = 0 'jestli se ma leva horni obrazovka automaticky prekreslit po stlaceni c'
 DIM expname(experimentu!) AS STRING
 DIM filename(experimentu!) AS STRING
 ' !TODO! 
-expname(1) = "Jednoducha navigace - zacvik"
-expname(2) = "Jednoducha navigace - zacvik 2"
-expname(3) = "Jednoducha navigace - virtualni"
-expname(4) = "Jednoducha navigace - realna"
-expname(5) = "Exit program"
+expname(1) = "AlloEgo navigace"
+expname(2) = "Exit program"
 ' !TODO! 
-filename(1) = "CFGad0.bas"
-filename(2) = "CFGad1.bas"
-filename(3) = "CFGadV.bas"
-filename(4) = "CFGad.bas"
+filename(1) = "CFGeeg.bas"
 
 
 DO
@@ -52,21 +46,11 @@ DO
   
   ' !TODO! 
    IF configno = 1 THEN
-    ' $INCLUDE: 'CFGad0.bas'
-		CALL main
-	elseIF configno = 2 THEN
-    ' $INCLUDE: 'CFGad1.bas'
-		CALL main
-	elseIF configno = 3 THEN
-    ' $INCLUDE: 'CFGadV.bas'
-		CALL main
-	elseIF configno = 4 THEN
     ' $INCLUDE: 'CFGad.bas'
 		CALL main
-  ELSEIF configno = 5 THEN
+  ELSEIF configno = 2 THEN
    PRINT "THE END"
   ELSE
     PRINT "  zadana spatna volba"; configno
   END IF
 LOOP WHILE configno <> experimentu!
-

@@ -1,5 +1,5 @@
 CONST VERSION$ = "1.9.2008"
-CONST VARIABLENO = 32
+CONST VARIABLENO = 48
 TYPE CUE
   startPoint AS INTEGER '0 - no start, 1 - start dot, pokud startPointno > 0, pouziva se jako cisla dalsiho laseru ze startPointarr
   startPointno AS INTEGER '0 - nepouziva se, pokud >0 pouziva se misto startPoint '

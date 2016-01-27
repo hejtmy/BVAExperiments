@@ -1,0 +1,75 @@
+[Config]
+Compilator.SaveAll=0
+Compilator.Capture=0
+Compilator.HideOutput=0
+Compilator.LogType=0
+DefaultCPIndex=0
+LogtoEnd=1
+DontOpen=0
+AbsolutePath=0
+FileFormat=0
+ProjectFilesOnly=0
+[Project tree]
+egoallo
+	+Složka
+		TYPEDEF.BAS
+		PICTURE.BAS
+		KAMINSKY.BAS
+		DRF2FUNC.BAS
+		DRF2FF.BAS
+		CFGview.bas
+		CFGea.bas
+		CFG.BAS
+		CFGadV.bas
+		CFGad0.bas
+		CFGad.bas
+[Open project files]
+0=CFGea.bas
+1=CFGview.bas
+2=DRF2FF.BAS
+3=DRF2FUNC.BAS
+4=KAMINSKY.BAS
+5=PICTURE.BAS
+6=TYPEDEF.BAS
+7=CFGad0.bas
+8=CFGadV.bas
+9=CFGad.bas
+10=CFG.BAS
+[Selected Project Files]
+Main=
+Selected=DRF2FF.BAS
+[CFGea.bas]
+TopLine=3
+Caret=1,15
+[CFGview.bas]
+TopLine=1
+Caret=21,9
+[DRF2FF.BAS]
+TopLine=367
+Caret=61,392
+BookMark0=1,397
+[DRF2FUNC.BAS]
+TopLine=1
+Caret=1,1
+[KAMINSKY.BAS]
+TopLine=144
+Caret=38,147
+[PICTURE.BAS]
+TopLine=99
+Caret=16,118
+BookMark0=12,80
+[TYPEDEF.BAS]
+TopLine=41
+Caret=31,62
+[CFGad0.bas]
+TopLine=1
+Caret=55,14
+[CFGadV.bas]
+TopLine=1
+Caret=1,13
+[CFGad.bas]
+TopLine=3
+Caret=59,9
+[CFG.BAS]
+TopLine=1
+Caret=27,12
