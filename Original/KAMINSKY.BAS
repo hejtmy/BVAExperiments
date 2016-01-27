@@ -41,7 +41,7 @@ DECLARE SUB cuesupdate (cuesnew() AS ANY)
 ' microsofti typy na assembler - kvuli mysi
 ' $INCLUDE: 'qbx.bi'
 
-CONST USETRACK% = 0
+CONST USETRACK% = 1 '= pouzaivani mysi, 1=trackovani LED v Arene
 CONST USECUES% = 1
 CONST ROTATEARENA% = 0
 CONST USESOUND% = 1
