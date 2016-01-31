@@ -59,8 +59,6 @@ phases(p).cues(c).kopiez = -1 'cue se nekopiruje'
 uhelzmena = 15
 posun = 0
 
-
-
 '-----------------------------'
 'ALLO fixni cil'
 '-----------------------------'
@@ -74,7 +72,6 @@ startarr(0)=7
 startarr(1)=4
 startarr(2)=8
 startarr(3)=2
-
 
 'only one mark position'
 laser = 3
@@ -97,48 +94,48 @@ goalmarkrelation = 2
 redim startarr(0 to opakovani-1) as integer 'pozice startu
 redim laserarr(0 to opakovani-1) as integer 'pozice znacek
 'start position
-startarr(0)=2 
+startarr(0)=2
 startarr(1)=6
-startarr(2)=3
-startarr(3)=4
-startarr(4)=7
-startarr(5)=1
-startarr(6)=5
-startarr(7)=8
-startarr(8)=3
-startarr(9)=5
-startarr(10)=6
+startarr(2)=4
+startarr(3)=6
+startarr(4)=1
+startarr(5)=3
+startarr(6)=7
+startarr(7)=6
+startarr(8)=4
+startarr(9)=1
+startarr(10)=7
 startarr(11)=1
-startarr(12)=2 
-startarr(13)=6
-startarr(14)=3
-startarr(15)=4
-startarr(16)=7
-startarr(17)=1
+startarr(12)=5
+startarr(13)=2
+startarr(14)=4
+startarr(15)=3
+startarr(16)=4
+startarr(17)=8
 startarr(18)=5
-startarr(19)=8
+startarr(19)=2
 
 'mark positions
-laserarr(0)=5 
-laserarr(1)=1 
-laserarr(2)=5
-laserarr(3)=8
-laserarr(4)=2
-laserarr(5)=6
-laserarr(6)=7
-laserarr(7)=4
-laserarr(8)=2
-laserarr(9)=6
-laserarr(10)=7
-laserarr(11)=4
-laserarr(12)=2 
-laserarr(13)=6
-laserarr(14)=3
-laserarr(15)=4
-laserarr(16)=7
-laserarr(17)=1
-laserarr(18)=5
-laserarr(19)=8
+laserarr(0)=3
+laserarr(1)=7
+laserarr(2)=3
+laserarr(3)=6
+laserarr(4)=8
+laserarr(5)=4
+laserarr(6)=1
+laserarr(7)=7
+laserarr(8)=4
+laserarr(9)=2
+laserarr(10)=6
+laserarr(11)=8
+laserarr(12)=5
+laserarr(13)=1
+laserarr(14)=2
+laserarr(15)=2
+laserarr(16)=5
+laserarr(17)=7
+laserarr(18)=6
+laserarr(19)=3
 for i = 0 to opakovani-1
   phases(p).cues(0).laserarr(i+posun) = startarr(i)  
   phases(p).cues(1).laserarr(i+posun) = laserarr(i)
@@ -177,25 +174,25 @@ goalmarkrelation = 5 'zmena ze 4 na 5 16.12.2008'
 redim startarr(0 to opakovani-1) as integer 'pozice startu
 redim laserarr(0 to opakovani-1) as integer 'pozice znacek
 'start positions
-startarr(0)=2 
+startarr(0)=2
 startarr(1)=6
-startarr(2)=3
-startarr(3)=4
-startarr(4)=7
-startarr(5)=1
-startarr(6)=5
-startarr(7)=8
-startarr(8)=3
+startarr(2)=1
+startarr(3)=5
+startarr(4)=4
+startarr(5)=2
+startarr(6)=8
+startarr(7)=4
+startarr(8)=7
 startarr(9)=5
-startarr(10)=6
+startarr(10)=3
 startarr(11)=1
-startarr(12)=2 
-startarr(13)=6
-startarr(14)=3
-startarr(15)=4
-startarr(16)=7
-startarr(17)=1
-startarr(18)=5
+startarr(12)=5
+startarr(13)=3
+startarr(14)=8
+startarr(15)=6
+startarr(16)=1
+startarr(17)=7
+startarr(18)=3
 startarr(19)=8
 for i = 0 to opakovani-1
   phases(p).cues(0).laserarr(i+posun) = startarr(i)  
